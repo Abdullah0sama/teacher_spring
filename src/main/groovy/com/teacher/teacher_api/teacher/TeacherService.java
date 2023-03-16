@@ -29,4 +29,8 @@ public class TeacherService {
     public List<Teacher> getTeachers() {
         return this.teacherRepository.findAll();
     }
+
+    public List<Teacher> getTeachersWithPrefix(String prefix) {
+        return this.teacherRepository.findTeachersByFirstNameStartsWithIgnoreCaseOrLastNameStartsWithIgnoreCase(prefix, prefix);
+    }
 }

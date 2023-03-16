@@ -32,6 +32,11 @@ public class TeacherController {
         return this.teacherService.getTeacherByEmail(email);
     }
 
+    @GetMapping("/startWith{prefix}")
+    List<Teacher> getTeachersStartWithPrefix(@PathVariable String prefix) {
+        return this.teacherService.getTeachersWithPrefix(prefix);
+    }
+
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     Teacher createTeacher(@Valid @RequestBody CreateTeacherDto createTeacherDto) {
