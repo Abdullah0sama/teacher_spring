@@ -1,5 +1,8 @@
 package com.teacher.teacher_api.teacher;
 
+import com.teacher.teacher_api.teacher.dtos.CreateTeacherDto;
+import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +14,12 @@ import java.util.List;
 public class TeacherController {
 
     private TeacherService teacherService;
+    private ModelMapper modelMapper;
+
     @Autowired
-    public TeacherController(TeacherService teacherService) {
+    public TeacherController(TeacherService teacherService, ModelMapper modelMapper) {
         this.teacherService = teacherService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping()
@@ -28,8 +34,9 @@ public class TeacherController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    Teacher createTeacher(@RequestBody Teacher createTeacherDto) {
-        return this.teacherService.createTeacher(createTeacherDto);
+    Teacher createTeacher(@Valid @RequestBody CreateTeacherDto createTeacherDto) {
+        Teacher teacher = modelMapper.map(createTeacherDto, Teacher.class);
+        return this.teacherService.createTeacher(teacher);
     }
 
     @DeleteMapping("/{id}")
