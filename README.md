@@ -34,7 +34,7 @@ A REATful API made using spring boot
   
     
     ```console
-    curl localhost:8080/teacher/startWithj
+    curl localhost:8080/teacher/startWitha
     ```
     
   - `DELETE /teacher/{id}` delete teacher with matching id
